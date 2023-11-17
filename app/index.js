@@ -18,20 +18,25 @@ const router = useRouter();
     <SafeAreaView style={styles.container}>
       <Text style={{ 
         fontSize: 30 }}>
-          Celiapp
           </Text>
 
           <Stack.Screen
             options={{
-              headerStyle: { backgroundColor: COLORS.lightWhite},
-              headerShadowVisible: false,
+              headerStyle: { backgroundColor: "white"},
+              headerShadowVisible: true,
               headerLeft: () => (
                 <ScreenHeaderBtn iconUrl={icons.menu} dimension='60%' />
               ),
               headerRight: () => (
                 <ScreenHeaderBtn iconUrl={images.profile} dimension='100%' />
               ),
-              headerTitle: "header",
+              headerTitle: "Celiapp",
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                color: 'black', // Set the color of the header title to black
+                fontSize: 20, // Adjust the font size if needed
+                fontWeight: 'bold', // You can also set the font weight
+              },
             }}
             />
 
@@ -47,7 +52,9 @@ const router = useRouter();
                 <Nearbyjobs />
               </View>
             </ScrollView>
-          
+
+
+
       </SafeAreaView>
   );
 }
@@ -55,7 +62,7 @@ const router = useRouter();
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#dff8f4',
+    backgroundColor: '#eafaf8',
     alignItems: 'center',
     justifyContent: 'center',
   },
