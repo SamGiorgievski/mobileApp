@@ -18,6 +18,8 @@ const Welcome = ( { searchTerm, setSearchTerm, handleClick }) => {
   const router = useRouter();
   const [activeGuideType, setActiveGuideType] = useState("Guides");
 
+
+
   return (
     <View>
       <View style={styles.container}>
@@ -62,6 +64,12 @@ const Welcome = ( { searchTerm, setSearchTerm, handleClick }) => {
           contentContainerStyle={{ columnGap: SIZES.small }}
           horizontal
         />
+      </View>
+
+      <View>
+
+        <Text></Text>
+
       </View>
 
     </View>
