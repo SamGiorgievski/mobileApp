@@ -10,28 +10,28 @@ const Nearbyjobs = () => {
 
   const guides =[
     {
-      name: "Alcohol",
+      title: "Alcohol",
       id: 1,
       allowed: ["tequila", "rum", "wine", "cider"],
       not_allowed: ["whiskey", "scotch", "beer"],
       message: "Let's get drunk!",
-      img: "./alcohol.jpeg"
+      img: require("./alcohol.jpeg")
     },
     {
-      name: "Sauces",
+      title: "Sauces",
       id: 2,
       allowed: ["ketchup", "mustard", "mayonaise"],
       not_allowed: ["soy sauce", "fish sauce", "malt vinegar"],
       message: "Let's get saucy!",
-      img: "./sauce.jpeg"
+      img: require("./sauce.jpeg")
     },
     {
-      name: "Snacks",
+      title: "Snacks",
       id: 3,
       allowed: ["popcorn", "chips", "licorice"],
       not_allowed: ["pretzels", "nuts", "crackers"],
       message: "Let's get snacky!",
-      img: "./snack.jpeg"
+      img: require("./snack.jpeg")
     }
   ] ;
 

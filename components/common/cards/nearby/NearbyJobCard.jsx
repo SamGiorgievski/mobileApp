@@ -4,9 +4,6 @@ import styles from "./nearbyjobcard.style";
 
 const NearbyJobCard = ({ guide, handleNavigate }) => {
 
-  const icon = guide.img
-  ? require('./alcohol.jpeg')
-  : require('./alcohol.jpeg');
 
   return (
     <TouchableOpacity 
@@ -16,7 +13,7 @@ const NearbyJobCard = ({ guide, handleNavigate }) => {
 
       <TouchableOpacity style={styles.logoContainer}>
         <Image
-          source={icon}
+          source={guide.img}
           resizeMode='contain'
           style={styles.logImage}
         />
@@ -24,7 +21,7 @@ const NearbyJobCard = ({ guide, handleNavigate }) => {
 
       <View style={styles.textContainer}>
         <Text style={styles.jobName} numberOfLines={1}>
-          {guide.name}
+          {guide.title}
         </Text>
 
         <Text style={styles.jobType}>
