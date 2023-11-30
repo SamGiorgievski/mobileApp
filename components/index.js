@@ -1,4 +1,6 @@
 import ScreenHeaderBtn from "./common/header/ScreenHeaderBtn";
+import MyTabs from "./common/footer/footer"
+import CameraPage from "./camera/CameraPage"
 
 // home screen
 import Welcome from "./home/welcome/Welcome";
@@ -25,5 +27,7 @@ export {
   JobAbout,
   JobFooter,
   Specifics,
-  NearbyJobCard
+  NearbyJobCard,
+  MyTabs,
+  CameraPage
 };
