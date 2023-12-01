@@ -1,17 +1,11 @@
 import { StyleSheet, Text, View, ScrollView, SafeAreaView, Pressable } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
 import { Stack, useRouter } from 'expo-router';
-import { COLORS, icons, images, SIZES } from '../constants';
+import { icons, images, SIZES } from '../constants';
 import {
-  Nearbyjobs,
-  Popularjobs,
-  ScreenHeaderBtn,
-  MyTabs,
-  Welcome,
+  HomePage,
+  ScreenHeaderBtn
 } from "../components";
 import Icon from 'react-native-ico-material-design';
-
 
 
 export default function Home() {
@@ -46,8 +40,6 @@ const router = useRouter();
 
             
 
-
-
       <ScrollView showsVerticalScrollIndicator={false}>
               <View
                 style={{
@@ -55,9 +47,7 @@ const router = useRouter();
                   padding: SIZES.medium,
                 }}
               >
-                <Welcome />
-                <Popularjobs />
-                <Nearbyjobs />
+                <HomePage />
               </View>
             </ScrollView>
   
@@ -100,9 +90,7 @@ const router = useRouter();
         </Pressable>
 
       </View>
-
     </View>
-
 
 
       </SafeAreaView>

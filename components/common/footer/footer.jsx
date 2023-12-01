@@ -1,17 +1,14 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import Welcome from "../../home/welcome/Welcome";
-import Nearbyjobs from '../../home/nearby/Nearbyjobs';
 
 import  MaterialCommunityIcons  from 
 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Tab = createMaterialBottomTabNavigator();
+
 
 export default function App() {
   return (
-
+    <NavigationContainer>
     <Tab.Navigator labeled={false} barStyle={{ backgroundColor: 'black' }} 
 activeColor="white" >
       <Tab.Screen name="Home" component={Welcome}            //Home Screen
@@ -27,5 +24,6 @@ activeColor="white" >
         )
     }}/>
     </Tab.Navigator>
+    </NavigationContainer>
   );
 }

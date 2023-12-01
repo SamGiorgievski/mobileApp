@@ -10,7 +10,6 @@ import {
 } from "react-native";
 
 import {
-  JobFooter,
   ScreenHeaderBtn
 } from "../../components";
 import { COLORS, icons, SIZES } from "../../constants";
@@ -57,8 +56,6 @@ const GuideDetails = () => {
 
             <Text> Alcohol!</Text>
         </ScrollView>
-
-        <JobFooter url='https://google.com/' />
       </>
     </SafeAreaView>
   )
