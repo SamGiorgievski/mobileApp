@@ -1,8 +1,8 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 
-import styles from "./nearbyjobcard.style";
+import styles from "./GuideCard.style";
 
-const NearbyJobCard = ({ guide, handleNavigate }) => {
+const GuideCard = ({ guide, handleNavigate }) => {
 
 
   return (
@@ -33,4 +33,4 @@ const NearbyJobCard = ({ guide, handleNavigate }) => {
   );
 };
 
-export default NearbyJobCard;
+export default GuideCard;

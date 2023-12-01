@@ -1,29 +1,47 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
+import { View, Pressable } from 'react-native';
+import Icon from 'react-native-ico-material-design';
 
-import  MaterialCommunityIcons  from 
-'react-native-vector-icons/MaterialCommunityIcons';
-
-
-
-export default function App() {
+export default function Footer() {
   return (
-    <NavigationContainer>
-    <Tab.Navigator labeled={false} barStyle={{ backgroundColor: 'black' }} 
-activeColor="white" >
-      <Tab.Screen name="Home" component={Welcome}            //Home Screen
-      options={{
-        tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26}/>
-        ),
-    }}/>
-      <Tab.Screen name="Search" component={Nearbyjobs}      // Search Screen
-      options={{
-        tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="magnify" color={color} size={26}/>
-        )
-    }}/>
-    </Tab.Navigator>
-    </NavigationContainer>
-  );
+    <View style={{
+      position: "absolute",
+      alignItems: "center",
+      bottom: 0
+    }}>
+      <View style ={{
+        flexDirection: 'row',
+        backgroundColor: '#FFFFFF',
+        width: '100%',
+        justifyContent: 'space-evenly'
+      }}>
+        <Pressable style={{
+          padding: 14
+        }} android_ripple={{
+          borderless: true,
+          radius:50
+        }}>
+        <Icon name="map-symbol" height="26" width="26" color='#000000' />
+        </Pressable>
+
+        <Pressable style={{
+          padding: 14
+        }} android_ripple={{
+          borderless: true,
+          radius:50
+        }}>
+        <Icon name="camera" height="26" width="26" color='#000000' />
+        </Pressable>
+
+        <Pressable style={{
+          padding: 14
+        }} android_ripple={{
+          borderless: true,
+          radius:50
+        }}>
+        <Icon name="man-walking-directions-button" height="26" width="26" color='#000000' />
+        </Pressable>
+
+      </View>
+    </View>
+  )
 }

@@ -1,18 +1,16 @@
-import { Stack, useRouter, useSearchParams } from "expo-router";
+import { Stack, useRouter} from "expo-router";
 import { useCallback, useState } from "react";
 import {
-  View,
   Text,
   SafeAreaView,
   ScrollView,
-  ActivityIndicator,
   RefreshControl,
 } from "react-native";
 
 import {
   ScreenHeaderBtn
 } from "../../components";
-import { COLORS, icons, SIZES } from "../../constants";
+import { COLORS, icons } from "../../constants";
 
 const GuideDetails = () => {
 

@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { View, Text, TouchableOpacity, TextInput, Image,
   FlatList } from "react-native";
 import styles from "./HomePage.style";
-import NearbyJobCard from "../common/cards/nearby/NearbyJobCard";
+import NearbyJobCard from "../common/cards/GuideCard";
 import { icons, SIZES } from "../../constants";
 
 const HomePage = ( { searchTerm, setSearchTerm, handleClick } ) => {
