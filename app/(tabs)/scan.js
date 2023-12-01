@@ -1,57 +1,74 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, Button } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Stack, useRouter } from 'expo-router';
-import { Camera, CameraType } from 'expo-camera';
+import { Camera, CameraType,  } from 'expo-camera';
 import { COLORS, icons, images, SIZES } from '../../constants';
 import {
   Guides,
   ScreenHeaderBtn,
   Welcome,
+  Header
 } from "../../components";
 
 export default function camera() {
+  const [type, setType] = useState(CameraType.back);
+  const [permission, requestPermission] = Camera.useCameraPermissions();
 
-  const router = useRouter();
+  if (!permission) {
+    // Camera permissions are still loading
+    return <View />;
+  }
+
+  if (!permission.granted) {
+    // Camera permissions are not granted yet
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    );
+  }
+
+  function toggleCameraType() {
+    setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
+  }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={{
-        fontSize: 30
-      }}>
-      </Text>
-
-      <Stack.Screen
-        options={{
-          headerStyle: { backgroundColor: "white" },
-          headerShadowVisible: true,
-          headerLeft: () => (
-            <ScreenHeaderBtn iconUrl={icons.menu} dimension='60%' />
-          ),
-          headerRight: () => (
-            <ScreenHeaderBtn iconUrl={images.profile} dimension='100%' />
-          ),
-          headerTitle: "Celiapp",
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            color: 'black', // Set the color of the header title to black
-            fontSize: 20, // Adjust the font size if needed
-            fontWeight: 'bold', // You can also set the font weight
-          },
-        }}
-      />
-
-      <Text>scan page</Text>
-
-    </SafeAreaView>
+    <View style={styles.container}>
+      <Camera style={styles.camera} type={type}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+            <Text style={styles.text}>Flip Camera</Text>
+          </TouchableOpacity>
+        </View>
+      </Camera>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eafaf8',
-    alignItems: 'center',
     justifyContent: 'center',
+  },
+  camera: {
+    flex: 1,
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    margin: 64,
+  },
+  button: {
+    flex: 1,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });

@@ -2,12 +2,12 @@ import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Stack, useRouter } from 'expo-router';
-import { Camera, CameraType } from 'expo-camera';
 import { COLORS, icons, images, SIZES } from '../../constants';
 import {
   Guides,
   ScreenHeaderBtn,
   Welcome,
+  Header
 } from "../../components";
 
 export default function camera() {
@@ -21,25 +21,7 @@ export default function camera() {
       }}>
       </Text>
 
-      <Stack.Screen
-        options={{
-          headerStyle: { backgroundColor: "white" },
-          headerShadowVisible: true,
-          headerLeft: () => (
-            <ScreenHeaderBtn iconUrl={icons.menu} dimension='60%' />
-          ),
-          headerRight: () => (
-            <ScreenHeaderBtn iconUrl={images.profile} dimension='100%' />
-          ),
-          headerTitle: "Celiapp",
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            color: 'black', // Set the color of the header title to black
-            fontSize: 20, // Adjust the font size if needed
-            fontWeight: 'bold', // You can also set the font weight
-          },
-        }}
-      />
+      <Header/>
 
       <Text>forum</Text>
 
