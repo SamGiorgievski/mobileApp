@@ -9,29 +9,29 @@ import {
 
 export default function App() {
 
-const router = useRouter();
+  const router = useRouter();
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{ 
-        fontSize: 30 }}>
-        </Text>
+      <Text style={{
+        fontSize: 30
+      }}>
+      </Text>
 
-        <Header />  
+      <Header />
 
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View
-            style={{
-              flex: 1,
-              padding: SIZES.medium,
-            }}>
-            <HomePage />
-          </View>
-        </ScrollView>
-  
-    {/* <Footer /> */}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View
+          style={{
+            flex: 1,
+            padding: SIZES.medium,
+          }}>
+          <HomePage />
+        </View>
+      </ScrollView>
 
-      </SafeAreaView>
+
+    </SafeAreaView>
   );
 }
 

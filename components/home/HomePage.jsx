@@ -1,15 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "expo-router";
-import { View, Text, TouchableOpacity, TextInput, Image,
-  FlatList } from "react-native";
+import {
+  View, Text, TouchableOpacity, TextInput, Image,
+  FlatList
+} from "react-native";
 import styles from "../../components/home/HomePage.style";
-import { GuideCard } from "../../components/index";
+import GuideCard from "./guides/cards/GuideCard.jsx";
 import { icons, SIZES } from "../../constants";
 
-const HomePage = ( { searchTerm, setSearchTerm, handleClick } ) => {
+const HomePage = ({ searchTerm, setSearchTerm, handleClick }) => {
 
-  const guides =[
+  const guides = [
     {
       title: "Alcohol",
       id: 1,
@@ -34,82 +36,82 @@ const HomePage = ( { searchTerm, setSearchTerm, handleClick } ) => {
       message: "Let's get snacky!",
       img: require("./snack.jpeg")
     }
-  ] ;
+  ];
 
   const guideTypes = ["Guides", "Services", "Recipes"];
 
   const router = useRouter();
 
   const [activeGuideType, setActiveGuideType] = useState("Guides");
-  
+
 
 
 
   return (
     <>
-    <View>
-      <View style={styles.container}>
-        <Text style={styles.userName}>Welcome Sam!</Text>
-        <Text style={styles.welcomeMessage}>What do you need help with?</Text>
-      </View>
+      <View>
+        <View style={styles.container}>
+          <Text style={styles.userName}>Welcome Sam!</Text>
+          <Text style={styles.welcomeMessage}>What do you need help with?</Text>
+        </View>
 
-      <View style={styles.searchContainer}>
-        <View style={styles.searchWrapper}>
-          <TextInput
-            style={styles.searchInput}
-            value={searchTerm}
-            onChangeText={(text) => setSearchTerm(text)}
-            placeholder='What are you looking for?'
+        <View style={styles.searchContainer}>
+          <View style={styles.searchWrapper}>
+            <TextInput
+              style={styles.searchInput}
+              value={searchTerm}
+              onChangeText={(text) => setSearchTerm(text)}
+              placeholder='What are you looking for?'
+            />
+          </View>
+
+          <TouchableOpacity style={styles.searchBtn} onPress={handleClick}>
+            <Image
+              source={icons.search}
+              resizeMode='contain'
+              style={styles.searchBtnImage}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.tabsContainer}>
+          <FlatList
+            data={guideTypes}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.tab(activeGuideType, item)}
+                onPress={() => {
+                  setActiveGuideType(item);
+                  router.push(`/search/${item}`);
+                }}
+              >
+                <Text style={styles.tabText(activeGuideType, item)}>{item}</Text>
+              </TouchableOpacity>
+            )}
+            keyExtractor={(item) => item}
+            contentContainerStyle={{ columnGap: SIZES.small }}
+            horizontal
           />
         </View>
 
-        <TouchableOpacity style={styles.searchBtn} onPress={handleClick}>
-          <Image
-            source={icons.search}
-            resizeMode='contain'
-            style={styles.searchBtnImage}
-          />
-        </TouchableOpacity>
-      </View>
+        <View>
 
-      <View style={styles.tabsContainer}>
-        <FlatList
-          data={guideTypes}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={styles.tab(activeGuideType, item)}
-              onPress={() => {
-                setActiveGuideType(item);
-                router.push(`/search/${item}`);
-              }}
-            >
-              <Text style={styles.tabText(activeGuideType, item)}>{item}</Text>
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item) => item}
-          contentContainerStyle={{ columnGap: SIZES.small }}
-          horizontal
-        />
-      </View>
+          <Text></Text>
 
-      <View>
-
-        <Text></Text>
+        </View>
 
       </View>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>Guides</Text>
+          <TouchableOpacity>
+            <Text style={styles.headerBtn}>Show all</Text>
+          </TouchableOpacity>
+        </View>
 
-    </View>
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Guides</Text>
-        <TouchableOpacity>
-          <Text style={styles.headerBtn}>Show all</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.cardsContainer}>
 
-      <View style={styles.cardsContainer}>
-
-        {guides.map((guide) => (
+          {guides.map((guide) => (
             <GuideCard
               guide={guide}
               key={`guide-${guide.id}`}
@@ -117,8 +119,8 @@ const HomePage = ( { searchTerm, setSearchTerm, handleClick } ) => {
             />
           ))}
 
+        </View>
       </View>
-    </View>
     </>
   );
 };

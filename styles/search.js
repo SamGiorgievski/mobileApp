@@ -20,13 +20,6 @@ const styles = StyleSheet.create({
     loaderContainer: {
         marginTop: SIZES.medium
     },
-    footerContainer: {
-        marginTop: SIZES.small,
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-        gap: 10
-    },
     paginationButton: {
         width: 30,
         height: 30,
