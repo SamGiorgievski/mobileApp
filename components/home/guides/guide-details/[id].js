@@ -9,8 +9,8 @@ import {
 
 import {
   ScreenHeaderBtn
-} from "../../components";
-import { COLORS, icons } from "../../constants";
+} from "../../..";
+import { COLORS, icons } from "../../../../constants";
 
 const GuideDetails = () => {
 

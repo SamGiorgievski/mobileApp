@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { View, Text, TouchableOpacity, TextInput, Image,
   FlatList } from "react-native";
 import styles from "./HomePage.style";
-import NearbyJobCard from "../common/cards/GuideCard";
+import { GuideCard } from "../index";
 import { icons, SIZES } from "../../constants";
 
 const HomePage = ( { searchTerm, setSearchTerm, handleClick } ) => {
@@ -110,7 +110,7 @@ const HomePage = ( { searchTerm, setSearchTerm, handleClick } ) => {
       <View style={styles.cardsContainer}>
 
         {guides.map((guide) => (
-            <NearbyJobCard
+            <GuideCard
               guide={guide}
               key={`guide-${guide.id}`}
               handleNavigate={() => router.push(`/guide-details/${guide.id}`)}

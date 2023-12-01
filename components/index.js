@@ -1,12 +1,12 @@
 import ScreenHeaderBtn from "./common/header/buttons/ScreenHeaderBtn.jsx";
-import CameraPage from "./camera/CameraPage"
-import Footer from "./common/footer/Footer.jsx"
+import CameraPage from "./camera/CameraPage";
+import Footer from "./common/footer/Footer";
 
 // home screen
-import HomePage from "./home/HomePage.jsx"
+import HomePage from "./home/HomePage.jsx";
 
 // common
-import GuideCard from "./common/cards/GuideCard.jsx";
+import GuideCard from "./home/guides/cards/GuideCard.jsx";
 import Header from "./common/header/Header.jsx";
 
 export {
