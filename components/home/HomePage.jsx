@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useRouter } from "expo-router";
 import { View, Text, TouchableOpacity, TextInput, Image,
   FlatList } from "react-native";
-import styles from "./HomePage.style";
-import { GuideCard } from "../index";
+import styles from "../../components/home/HomePage.style";
+import { GuideCard } from "../../components/index";
 import { icons, SIZES } from "../../constants";
 
 const HomePage = ( { searchTerm, setSearchTerm, handleClick } ) => {

@@ -1,12 +1,10 @@
 import { StyleSheet, Text, View, ScrollView, SafeAreaView, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
-import { SIZES } from '../constants';
+import { SIZES } from '../../constants';
 import {
   HomePage,
-  Header,
-  Footer
-} from "../components";
-import styles from './index.style'
+  Header
+} from "../../components";
 
 
 export default function App() {
@@ -31,8 +29,17 @@ const router = useRouter();
           </View>
         </ScrollView>
   
-    <Footer />
+    {/* <Footer /> */}
 
       </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#eafaf8',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

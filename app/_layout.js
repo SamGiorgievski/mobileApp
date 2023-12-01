@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { Stack, Text } from "expo-router";
 import { useCallback } from 'react';
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -13,8 +13,8 @@ const Layout = () => {
     DMRegular: require("../assets/fonts/DMSans-Regular.ttf"),
   });
 
-  const onLayoutRootView = useCallback (async () => {
-    if(fontsLeaded) {
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLeaded) {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded])
@@ -22,7 +22,11 @@ const Layout = () => {
   if (!fontsLoaded) return null;
 
   return (
-  <Stack onLayout={onLayoutRootView} />
+    <Stack onLayout={onLayoutRootView} >
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+      
+    </Stack>
   )
 };
 
