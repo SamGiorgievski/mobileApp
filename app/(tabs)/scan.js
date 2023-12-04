@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, ScrollView, SafeAreaView, useWindowDimensions,  TouchableOpacity, Button, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useState, useRef, useEffect } from 'react';
+import { shareAsync } from 'expo-sharing';
 import { Stack, useRouter } from 'expo-router';
 import { Camera, CameraType,  } from 'expo-camera';
 import { COLORS, icons, images, SIZES } from '../../constants';
@@ -13,7 +14,7 @@ import {
 import * as MediaLibrary from 'expo-media-library';
 
 export default function camera() {
-  let cameraRef = useRef();
+  let cameraRef = useRef(null);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [photo, setPhoto] = useState();
@@ -30,6 +31,10 @@ export default function camera() {
       requestPermission(permission.status === "granted");
       setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
     })();
+
+    return () => {
+      // Additional cleanup if needed
+    };
   }, []);
 
   if (!permission) {
@@ -72,6 +77,7 @@ export default function camera() {
     let sharePic = () => {
       shareAsync(photo.uri).then(() => {
         setPhoto(undefined);
+        console.log(photo)
       });
     };
 
@@ -83,7 +89,9 @@ export default function camera() {
 
     return (
       <SafeAreaView style={styles.container}>
-        <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
+
+        
+        <Image style={styles.preview} source={{ uri: `data:image/jpg;base64,${photo.base64}` }} />
         <Button title="Share" onPress={sharePic} />
         {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto} /> : undefined}
         <Button title="Discard" onPress={() => setPhoto(undefined)} />
