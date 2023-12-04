@@ -1,16 +1,9 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, useWindowDimensions,  TouchableOpacity, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, useWindowDimensions, Button, Image, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useState, useRef, useEffect } from 'react';
 import { shareAsync } from 'expo-sharing';
-import { Stack, useRouter } from 'expo-router';
-import { Camera, CameraType,  } from 'expo-camera';
-import { COLORS, icons, images, SIZES } from '../../constants';
-import {
-  Guides,
-  ScreenHeaderBtn,
-  Welcome,
-  Header
-} from "../../components";
+import { Camera } from 'expo-camera';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as MediaLibrary from 'expo-media-library';
 import { useIsFocused } from '@react-navigation/native';
 
@@ -22,7 +15,7 @@ export default function camera() {
   const isFocused = useIsFocused()
 
   // Camera ratio
-  const {width} = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const height = Math.round((width * 16) / 9);
 
 
@@ -93,33 +86,36 @@ export default function camera() {
       <SafeAreaView style={styles.container}>
 
 
-      <View style={styles.previewContainer}>
-        <Image style={styles.preview} source={{ uri: `data:image/jpg;base64,${photo.base64}` }} />
-        
-        <View style={styles.buttonRow}>
-          <Button title="Share" onPress={sharePic} style={styles.button} />
-          {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto} style={styles.button} /> : null}
-          <Button title="Discard" onPress={() => setPhoto(undefined)} style={styles.button} />
+        <View style={styles.previewContainer}>
+          <Image style={styles.preview} source={{ uri: `data:image/jpg;base64,${photo.base64}` }} />
+
+          <View style={styles.buttonRow}>
+            <Button title="Share" onPress={sharePic} style={styles.button} />
+            {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto} style={styles.button} /> : null}
+            <Button title="Discard" onPress={() => setPhoto(undefined)} style={styles.button} />
+          </View>
         </View>
-      </View>
       </SafeAreaView>
     );
   }
 
   return (
     <View>
-      { isFocused &&
-      <Camera style={{
-        height: height,
-        width: "100%"}} 
-        ref={cameraRef}
-        ratio="16:9">
-        <View style={styles.buttonContainer}>
-          <Button style={styles.button} title="Take Pic" onPress={takePic} />
-        </View>
-        <StatusBar style="auto" />
-      </Camera>
-}
+      {isFocused &&
+        <Camera style={{
+          height: height,
+          width: "100%"
+        }}
+          ref={cameraRef}
+          ratio="16:9">
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={takePic}>
+              <Icon style={styles.cameraicon} name="camera-wireless-outline" size={40} color="#000" />
+            </TouchableOpacity>
+          </View>
+          <StatusBar style="auto" />
+        </Camera>
+      }
     </View>
   );
 
@@ -138,10 +134,19 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   button: {
-    flex: 1,
     alignSelf: 'center',
     alignItems: 'center',
-    width: "75%",
+    justifyContent: 'center',
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    borderWidth: 3,
+    borderColor: "#5d8aba",
+    backgroundColor: 'transparent',
+  },
+  cameraicon: {
+    marginBottom: 4,
+    color: "#5d8aba"
   },
   preview: {
     alignSelf: 'stretch',
