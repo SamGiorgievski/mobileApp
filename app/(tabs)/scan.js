@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, useWindowDimensions,  TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, useWindowDimensions,  TouchableOpacity, Button, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Stack, useRouter } from 'expo-router';
 import { Camera, CameraType,  } from 'expo-camera';
 import { COLORS, icons, images, SIZES } from '../../constants';
@@ -10,16 +10,31 @@ import {
   Welcome,
   Header
 } from "../../components";
+import * as MediaLibrary from 'expo-media-library';
 
 export default function camera() {
-  const [type, setType] = useState(CameraType.back);
+  let cameraRef = useRef();
   const [permission, requestPermission] = Camera.useCameraPermissions();
+  const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
+  const [photo, setPhoto] = useState();
+
+  // Camera ratio
   const {width} = useWindowDimensions();
   const height = Math.round((width * 16) / 9);
 
+
+  useEffect(() => {
+    (async () => {
+      const permission = await Camera.requestCameraPermissionsAsync();
+      const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
+      requestPermission(permission.status === "granted");
+      setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
+    })();
+  }, []);
+
   if (!permission) {
     // Camera permissions are still loading
-    return <View />;
+    return (<View />);
   }
 
   if (!permission.granted) {
@@ -32,24 +47,84 @@ export default function camera() {
     );
   }
 
-  function toggleCameraType() {
-    setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
+
+
+  // Test
+
+  if (permission === undefined) {
+    return <Text>Requesting permissions...</Text>
+  } else if (!permission) {
+    return <Text>Permission for camera not granted. Please change this in settings.</Text>
+  }
+
+  let takePic = async () => {
+    let options = {
+      quality: 1,
+      base64: true,
+      exif: false
+    };
+
+    let newPhoto = await cameraRef.current.takePictureAsync(options);
+    setPhoto(newPhoto);
+  };
+
+  if (photo) {
+    let sharePic = () => {
+      shareAsync(photo.uri).then(() => {
+        setPhoto(undefined);
+      });
+    };
+
+    let savePhoto = () => {
+      MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
+        setPhoto(undefined);
+      });
+    };
+
+    return (
+      <SafeAreaView style={styles.container}>
+        <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
+        <Button title="Share" onPress={sharePic} />
+        {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto} /> : undefined}
+        <Button title="Discard" onPress={() => setPhoto(undefined)} />
+      </SafeAreaView>
+    );
   }
 
   return (
-    <View style={styles.container}>
-      <Camera style={{
-        height: height,
-        width: "100%",
-      }} type={type} ratio="16:9">
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-            <Text style={styles.text}>Flip Camera</Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
-    </View>
+    <Camera style={{
+      height: height,
+      width: "100%"}} 
+      ref={cameraRef}
+      ratio="16:9">
+      <View style={styles.buttonContainer}>
+        <Button style={styles.button} title="Take Pic" onPress={takePic} />
+      </View>
+      <StatusBar style="auto" />
+    </Camera>
   );
+
+
+
+
+
+
+  // return (
+  //   <View style={styles.container}>
+  //     <Camera style={{
+  //       height: height,
+  //       width: "100%",
+  //     }} type={type} ratio="16:9">
+  //       <View style={styles.buttonContainer}>
+  //         <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+  //           <Text style={styles.text}>Flip Camera</Text>
+  //         </TouchableOpacity>
+  //       </View>
+  //     </Camera>
+  //   </View>
+  // );
+
+
 }
 
 const styles = StyleSheet.create({
@@ -59,13 +134,14 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     backgroundColor: 'transparent',
     margin: 64,
+    justifyContent: 'flex-end'
   },
   button: {
     flex: 1,
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
     alignItems: 'center',
   },
   text: {
