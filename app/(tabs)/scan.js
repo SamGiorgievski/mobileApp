@@ -12,12 +12,14 @@ import {
   Header
 } from "../../components";
 import * as MediaLibrary from 'expo-media-library';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function camera() {
   let cameraRef = useRef(null);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [photo, setPhoto] = useState();
+  const isFocused = useIsFocused()
 
   // Camera ratio
   const {width} = useWindowDimensions();
@@ -33,6 +35,7 @@ export default function camera() {
     })();
 
     return () => {
+
       // Additional cleanup if needed
     };
   }, []);
@@ -100,16 +103,20 @@ export default function camera() {
   }
 
   return (
-    <Camera style={{
-      height: height,
-      width: "100%"}} 
-      ref={cameraRef}
-      ratio="16:9">
-      <View style={styles.buttonContainer}>
-        <Button style={styles.button} title="Take Pic" onPress={takePic} />
-      </View>
-      <StatusBar style="auto" />
-    </Camera>
+    <View>
+      { isFocused &&
+      <Camera style={{
+        height: height,
+        width: "100%"}} 
+        ref={cameraRef}
+        ratio="16:9">
+        <View style={styles.buttonContainer}>
+          <Button style={styles.button} title="Take Pic" onPress={takePic} />
+        </View>
+        <StatusBar style="auto" />
+      </Camera>
+}
+    </View>
   );
 
 
