@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, useWindowDimensions,  TouchableOpacity, Button } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Stack, useRouter } from 'expo-router';
@@ -14,6 +14,8 @@ import {
 export default function camera() {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
+  const {width} = useWindowDimensions();
+  const height = Math.round((width * 16) / 9);
 
   if (!permission) {
     // Camera permissions are still loading
@@ -36,7 +38,10 @@ export default function camera() {
 
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={type}>
+      <Camera style={{
+        height: height,
+        width: "100%",
+      }} type={type} ratio="16:9">
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
             <Text style={styles.text}>Flip Camera</Text>
@@ -51,9 +56,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-  },
-  camera: {
-    flex: 1,
   },
   buttonContainer: {
     flex: 1,
