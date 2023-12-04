@@ -9,7 +9,7 @@ import styles from "../../components/home/HomePage.style";
 import GuideCard from "./guides/cards/GuideCard.jsx";
 import { icons, SIZES } from "../../constants";
 
-const HomePage = ({ searchTerm, setSearchTerm, handleClick }) => {
+export default function HomePage ({ searchTerm, setSearchTerm, handleClick }) {
 
   const guides = [
     {
@@ -39,13 +39,8 @@ const HomePage = ({ searchTerm, setSearchTerm, handleClick }) => {
   ];
 
   const guideTypes = ["Guides", "Services", "Recipes"];
-
   const router = useRouter();
-
   const [activeGuideType, setActiveGuideType] = useState("Guides");
-
-
-
 
   return (
     <>
@@ -124,6 +119,3 @@ const HomePage = ({ searchTerm, setSearchTerm, handleClick }) => {
     </>
   );
 };
-
-
-export default HomePage
