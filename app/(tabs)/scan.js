@@ -80,7 +80,6 @@ export default function camera() {
     let sharePic = () => {
       shareAsync(photo.uri).then(() => {
         setPhoto(undefined);
-        console.log(photo)
       });
     };
 
@@ -163,5 +162,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: 'white',
+  },
+  preview: {
+    alignSelf: 'stretch',
+    flex: 1
   },
 });
