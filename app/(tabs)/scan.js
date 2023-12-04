@@ -92,11 +92,16 @@ export default function camera() {
     return (
       <SafeAreaView style={styles.container}>
 
-        
+
+      <View style={styles.previewContainer}>
         <Image style={styles.preview} source={{ uri: `data:image/jpg;base64,${photo.base64}` }} />
-        <Button title="Share" onPress={sharePic} />
-        {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto} /> : undefined}
-        <Button title="Discard" onPress={() => setPhoto(undefined)} />
+        
+        <View style={styles.buttonRow}>
+          <Button title="Share" onPress={sharePic} style={styles.button} />
+          {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto} style={styles.button} /> : null}
+          <Button title="Discard" onPress={() => setPhoto(undefined)} style={styles.button} />
+        </View>
+      </View>
       </SafeAreaView>
     );
   }
@@ -118,27 +123,6 @@ export default function camera() {
     </View>
   );
 
-
-
-
-
-
-  // return (
-  //   <View style={styles.container}>
-  //     <Camera style={{
-  //       height: height,
-  //       width: "100%",
-  //     }} type={type} ratio="16:9">
-  //       <View style={styles.buttonContainer}>
-  //         <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-  //           <Text style={styles.text}>Flip Camera</Text>
-  //         </TouchableOpacity>
-  //       </View>
-  //     </Camera>
-  //   </View>
-  // );
-
-
 }
 
 const styles = StyleSheet.create({
@@ -157,6 +141,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
     alignItems: 'center',
+    width: "75%",
+  },
+  preview: {
+    alignSelf: 'stretch',
+    flex: 1,
+  },
+  previewContainer: {
+    flex: 1,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 20, // Adjust as needed
   },
   text: {
     fontSize: 24,
