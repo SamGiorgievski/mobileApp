@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, useWindowDimensions, Button, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, useWindowDimensions, Button, Image, TouchableOpacity, Modal } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useState, useRef, useEffect } from 'react';
 import { shareAsync } from 'expo-sharing';
@@ -6,12 +6,14 @@ import { Camera } from 'expo-camera';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as MediaLibrary from 'expo-media-library';
 import { useIsFocused } from '@react-navigation/native';
+import { ScanModal } from '../../components/index';
 
 export default function camera() {
   let cameraRef = useRef(null);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [photo, setPhoto] = useState();
+  const [modalSwitch, setModalSwitch] = useState("off");
   const isFocused = useIsFocused()
 
   // Camera ratio
@@ -93,7 +95,12 @@ export default function camera() {
             <Button title="Share" onPress={sharePic} style={styles.button} />
             {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto} style={styles.button} /> : null}
             <Button title="Discard" onPress={() => setPhoto(undefined)} style={styles.button} />
+            <Button title="Scan" style={styles.button} onPress={() => setModalSwitch("on")} />
           </View>
+          {modalSwitch === "on" &&
+          <ScanModal onClose={() => setModalSwitch("off")}></ScanModal>
+          }
+          
         </View>
       </SafeAreaView>
     );
