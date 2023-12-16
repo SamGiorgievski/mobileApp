@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
@@ -27,10 +27,9 @@ export default function camera() {
     { id: 9, title: 'Traveling with Celiac Disease: How to Stay Gluten-Free on the Road', lastCommentDate: new Date(2023, 1, 5) },
     { id: 10, title: 'Gluten-Free Kids: Support and Ideas for Parents', lastCommentDate: new Date(2023, 2, 5) },
     { id: 11, title: 'Gluten-Free Grocery Shopping: Finding the Best Products and Deals', lastCommentDate: new Date(2023, 2, 5) },
-    // Add more mock topics here...
   ]);
 
-  // Sorting topics by most recent comment
+  // Sort topics by most recent comment
   const sortedTopics = forumTopics.sort((a, b) => b.lastCommentDate - a.lastCommentDate);
 
   return (
@@ -43,9 +42,13 @@ export default function camera() {
         </View>
         <ScrollView style={styles.topicList}>
           {sortedTopics.map(topic => (
-            <View key={topic.id} style={styles.topicItem}>
+            <TouchableOpacity
+              key={topic.id}
+              style={styles.topicItem}
+              onPress={() => router.navigate('/topic-detail', { topic })}
+            >
               <Text style={styles.topicTitle}>{topic.title}</Text>
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
         <View style={styles.footer}>
@@ -55,6 +58,7 @@ export default function camera() {
     </SafeAreaView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
