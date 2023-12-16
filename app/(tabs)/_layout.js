@@ -9,14 +9,12 @@ function TabBarIcon(props) {
   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
 }
 
-
-
 const Layout = () => {
 
   return (
-    
+
     <Tabs>
-        <Tabs.Screen
+      <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
@@ -42,7 +40,7 @@ const Layout = () => {
         options={{
           title: 'services',
           tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
-          
+
         }}
       />
       <Tabs.Screen
@@ -67,7 +65,7 @@ const Layout = () => {
           tabBarIcon: ({ color }) => <TabBarIcon name="forward" color={color} />,
         }}
       />
-  </Tabs>
+    </Tabs>
   )
 };
 
