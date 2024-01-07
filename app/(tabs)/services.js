@@ -1,16 +1,10 @@
-import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { StyleSheet, Text, SafeAreaView } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
-import { COLORS, icons, images, SIZES } from '../../constants';
 import {
-  Guides,
-  ScreenHeaderBtn,
-  Welcome,
   Header
 } from "../../components";
 
-export default function camera() {
+export default function services() {
 
   const router = useRouter();
 
@@ -20,7 +14,7 @@ export default function camera() {
         fontSize: 30
       }}>
       </Text>
-        <Header />
+      <Header />
       <Text>services page</Text>
 
     </SafeAreaView>

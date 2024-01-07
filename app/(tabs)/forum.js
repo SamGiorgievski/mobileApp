@@ -1,18 +1,14 @@
 import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Stack, useRouter } from 'expo-router';
-import { COLORS, icons, images, SIZES } from '../../constants';
+import { useRouter } from 'expo-router';
+import { COLORS } from '../../constants';
 import forumPlaceholderData from '../../api/forum';
 import {
-  Guides,
-  ScreenHeaderBtn,
-  Welcome,
   Header
 } from "../../components";
 
-export default function camera() {
+export default function forum() {
 
   const router = useRouter();
   // Mock forum topics data
