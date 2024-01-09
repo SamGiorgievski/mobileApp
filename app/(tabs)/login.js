@@ -6,14 +6,12 @@ import {
   Header
 } from "../../components";
 import { View, TextInput, TouchableOpacity } from 'react-native';
-// import {  } from 'react-native-gesture-handler';
 
 export default function login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const navigation = useNavigation()
-  // const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
