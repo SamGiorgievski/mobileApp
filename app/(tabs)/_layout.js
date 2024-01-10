@@ -52,6 +52,7 @@ const Layout = () => {
         }}
       />
 
+
       <Tabs.Screen
         name="forum"
         options={{
