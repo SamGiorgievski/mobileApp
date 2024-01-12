@@ -59,6 +59,7 @@ const Layout = () => {
           title: 'forum',
           tabBarIcon: ({ color }) => <TabBarIcon name="comments-o" color={color} />,
         }}
+
       />
       <Tabs.Screen
         name="more"
